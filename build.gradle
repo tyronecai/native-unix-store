@@ -33,6 +33,8 @@ apply plugin: "java"
 apply plugin: "idea"
 apply plugin: "elasticsearch.esplugin"
 
+ext.projectSubstitutions = [:]
+
 check.dependsOn.remove(test)
 tasks.remove(test)
 
@@ -43,14 +45,16 @@ esplugin {
   name "native-unix-store"
   description "A store using native Unix system calls and options (mmap() with madvise(), open() with O_DIRECT) to use the system cache more efficiently"
   classname "fr.micoq.elasticsearch.NativeUnixStorePlugin"
+  licenseFile rootProject.file('LICENSE.txt')
+  noticeFile rootProject.file('NOTICE.txt')
 }
 
 licenseHeaders {
   approvedLicenses = ["Apache", "Generated", "Michaël"]
 }
 
-//licenseFile = rootProject.file("LICENSE.txt")
-//noticeFile = rootProject.file("NOTICE.txt")
+licenseFile = rootProject.file("LICENSE.txt")
+noticeFile = rootProject.file("NOTICE.txt")
 
 dependencies {
   implementation "org.elasticsearch:elasticsearch:${elasticsearchVersion}"
